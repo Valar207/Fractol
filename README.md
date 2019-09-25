@@ -1,1 +1,1 @@
-# Fract-ol
+# Fractol
