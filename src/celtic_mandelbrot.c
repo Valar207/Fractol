@@ -10,52 +10,38 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
-#include "libft/libft.h"
 #include "../includes/struct.h"
 #include "../includes/keyboard_code.h"
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdio.h>
 #include <math.h>
 
-int		main(int ac, char **av)
+void	celtic_mandelbrot(t_env *e)
 {
-	t_env	e;
-
-	if (ac != 2)
+	e->y = 0;
+	while(e->y < HEIGHT)
 	{
-		write(2, "usage: ./fractol [mandelbrot|julia...]\n", 39);
-		exit(0);
+		e->x = 0;
+		while(e->x < WIDTH)
+		{
+			e->pr = 1.5 * (e->x - WIDTH / 2) / (0.5 * e->zoom * WIDTH) + e->moveX;
+    		e->pi = (e->y - HEIGHT / 2) / (0.5 * e->zoom * HEIGHT) + e->moveY;
+			e->newRe = 0;
+			e->newIm = 0;
+			e->i = 0;
+			while(e->i < e->maxIterations && (e->newRe * e->newRe + e->newIm * e->newIm) < 4)
+			{
+				e->oldRe = e->newRe;
+				e->oldIm = e->newIm;
+				e->newRe = fabs(e->oldRe * e->oldRe - e->oldIm * e->oldIm) + e->pr;
+				e->newIm = 2 * e->oldRe * e->oldIm + e->pi;
+				e->i++;
+				if (e->i == e->maxIterations)
+					e->color = 0x56000000;
+				else
+					e->color = 0x3357FF00 * (e->i);
+			}
+			ft_fill_pix(e, e->x, e->y);
+			e->x++;
+		}
+		e->y++;
 	}
-	init_var(&e);
-	e.arg = av[1];
-	if ((ft_strncmp(av[1], "mandelbrot", 10) == 0))
-	{
-		e.moveX = -0.5;
-		mandelbrot(&e);
-	}
-	if ((ft_strncmp(av[1], "celtic_mandelbrot", 10) == 0))
-	{
-		e.moveX = -0.5;
-		celtic_mandelbrot(&e);
-	}
-	if ((ft_strncmp(av[1], "burning_ship", 10) == 0))
-	{
-		e.moveX = -0.5;
-		burning_ship(&e);
-	}
-	if ((ft_strncmp(av[1], "julia", 5) == 0))
-	{
-		e.cr = 0;
-		e.ci = 0;
-		julia(&e);
-	}
-	mlx_put_image_to_window(e.mlx, e.win, e.pt_img, 0, 0);
-	mlx_hook(e.win, 2, 0, key_press, &e);
-	mlx_hook(e.win, 6, 0, mouse_move, &e);
-	mlx_hook(e.win, 5, 0, mouse_release, &e);
-	mlx_loop(e.mlx);
-	return (0);
 }

@@ -46,13 +46,21 @@ typedef struct	s_env
 	double		moveX;
 	double		moveY;
 	int			maxIterations;
+	char		*arg;
+	int			click;
 
 }				t_env; 
 
 void			ft_fill_pix(t_env *e, int x, int y);
 void			init_var(t_env *e);
 int				key_press(int k, t_env *e);
+int				mouse_move(int x, int y, t_env *e);
+int				mouse_release(int k, int x, int y, t_env *e);
+
+
 void			julia(t_env *e);
 void			mandelbrot(t_env *e);
+void			celtic_mandelbrot(t_env *e);
+void			burning_ship(t_env *e);
 
 #endif

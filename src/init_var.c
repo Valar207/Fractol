@@ -33,4 +33,5 @@ void	init_var(t_env *e)
 	e->moveX = 0;
 	e->moveY = 0;
 	e->maxIterations = 20;
+	e->click = 0;
 }
