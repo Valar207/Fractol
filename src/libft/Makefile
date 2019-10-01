@@ -78,7 +78,6 @@ FILES = ft_memset.c \
 		ft_recursive_power.c \
 		ft_sqrt.c \
 		get_next_line.c \
-		ft_split_moi.c \
 		ft_free_tab_int.c \
 		ft_free_tab_char.c
 
