@@ -20,10 +20,12 @@ void	ft_fill_pix(t_env *e, int x, int y)
 	i = (((HEIGHT - (HEIGHT - y)) * WIDTH) - (WIDTH - x)) * 4;
 	if (x < WIDTH && x > 0 && y < HEIGHT && y > 0)
 	{
-		e->my_img[i + 0] = (e->color & 0xFF000000) >> 24;
-		e->my_img[i + 1] = (e->color & 0x00FF0000) >> 16;
-		e->my_img[i + 2] = (e->color & 0x0000FF00) >> 8;
+		if (e->sw == 1)
+		{
+			e->my_img[i + 0] = (e->color * e->i & 0xFF000000) >> 24;
+			e->my_img[i + 1] = (e->color * e->i & 0x00FF0000) >> 16;
+			e->my_img[i + 2] = (e->color * e->i & 0x0000FF00) >> 8;
+		}
 		e->my_img[i + 3] = (e->color & 0x000000FF) >> 0;
-
 	}
 }

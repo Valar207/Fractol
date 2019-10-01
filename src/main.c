@@ -41,6 +41,11 @@ int		main(int ac, char **av)
 		e.moveX = -0.5;
 		celtic_mandelbrot(&e);
 	}
+	if ((ft_strncmp(av[1], "mandelbar", 10) == 0))
+	{
+		e.moveX = 0;
+		mandelbar(&e);
+	}
 	if ((ft_strncmp(av[1], "burning_ship", 10) == 0))
 	{
 		e.moveX = -0.5;
@@ -53,6 +58,7 @@ int		main(int ac, char **av)
 		julia(&e);
 	}
 	mlx_put_image_to_window(e.mlx, e.win, e.pt_img, 0, 0);
+	user_interface_texts(&e);
 	mlx_hook(e.win, 2, 0, key_press, &e);
 	mlx_hook(e.win, 6, 0, mouse_move, &e);
 	mlx_hook(e.win, 5, 0, mouse_release, &e);

@@ -33,6 +33,7 @@ int		mouse_move(int x, int y, t_env *e)
 	if ((ft_strncmp(e->arg, "julia", 5) == 0))
 		julia(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->pt_img, 0, 0);
+	user_interface_texts(e);
 	return (0);
 }
 
@@ -68,7 +69,6 @@ int		mouse_press(int k, int x, int y, t_env *e)
 	{
 		zoom_mouse(&c, e);
 		e->zoom += 0.1 * e->zoom * (k == 5 ? -1 : 1);
-
 	}
 	mlx_destroy_image(e->mlx, e->pt_img);
 	e->pt_img = mlx_new_image(e->mlx, WIDTH, HEIGHT);
@@ -80,7 +80,9 @@ int		mouse_press(int k, int x, int y, t_env *e)
 		burning_ship(e);
 	if ((ft_strncmp(e->arg, "julia", 5) == 0))
 		julia(e);
+	if ((ft_strncmp(e->arg, "mandelbar", 9) == 0))
+		mandelbar(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->pt_img, 0, 0);
-
+	user_interface_texts(e);
 	return (0);
 }

@@ -27,11 +27,11 @@ void	init_var(t_env *e)
 	e->win = mlx_new_window(e->mlx, WIDTH, HEIGHT, "FRACTOL");
 	e->pt_img = mlx_new_image(e->mlx, WIDTH, HEIGHT);
 	e->my_img = mlx_get_data_addr(e->pt_img, &(bpp), &(s_l), &(endian));
-	//e->color = 0xFFFF3600;
-
 	e->zoom = 0.6;
 	e->moveX = 0;
 	e->moveY = 0;
-	e->maxIterations = 20;
+	e->maxIterations = 40;
 	e->click = 0;
+	e->chgcol = 1;
+	e->sw = 1;
 }

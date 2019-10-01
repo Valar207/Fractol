@@ -14,7 +14,7 @@
 #include "../includes/keyboard_code.h"
 #include <math.h>
 
-void	burning_ship(t_env *e)
+void	mandelbar(t_env *e)
 {
 	e->y = 0;
 	while(e->y < HEIGHT)
@@ -31,8 +31,10 @@ void	burning_ship(t_env *e)
 			{
 				e->oldRe = e->newRe;
 				e->oldIm = e->newIm;
-				e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm + e->pr;
-				e->newIm = 2 * fabs(e->oldRe * e->oldIm) + e->pi;
+				e->newRe = e->oldRe * (e->oldRe * e->oldRe * e->oldRe * e->oldRe - 10 * e->oldIm * e->oldIm * e->oldRe * e->oldRe \
+				 + 5 * e->oldIm * e->oldIm * e->oldIm * e->oldIm) + e->pr;
+				e->newIm = -e->newIm * (5 * e->oldRe * e->oldRe * e->oldRe * e->oldRe \
+				- 10 * e->oldIm * e->oldIm * e->oldRe * e->oldRe + e->oldIm * e->oldIm * e->oldIm * e->oldIm) + e->pi;
 				e->i++;
 				color(e);
 			}

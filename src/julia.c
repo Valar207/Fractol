@@ -33,10 +33,7 @@ void	julia(t_env *e)
 				e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm + e->cr;
 				e->newIm = 2 * e->oldRe * e->oldIm + e->ci;
 				e->i++;
-				if (e->i == e->maxIterations)
-					e->color = 0x56000000;
-				else
-					e->color = 0x3357FF00 * (e->i);			
+				color(e);	
 			}
 			ft_fill_pix(e, e->x, e->y);
 			e->x++;
