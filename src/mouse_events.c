@@ -19,58 +19,57 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-void	move_zoom_iteration(int k, t_env *e)
+int		mouse_move(int x, int y, t_env *e)
 {
-	if (k == A || k == D)
-		e->moveX += 0.025 / e->zoom * (k == A ? -1 : 1);
-	if (k == W || k == S)
-		e->moveY += 0.025 / e->zoom * (k == W ? -1 : 1);
-	if (k == MINUS || k == PLUS)
-		e->zoom += 0.1 * e->zoom * (k == MINUS ? -1 : 1);
-	if (k == O || k == P)
-		e->maxIterations += 1 * (k == O ? -1 : 1);
-}
-
-void	change_fract(int k, t_env *e)
-{
-	if (k == NUM_1)
+	if ((ft_strncmp(e->arg, "julia", 5) != 0))
+		return (0);
+	if (e->click == 0)
 	{
-		mandelbrot(e);
-		e->arg = "mandelbrot";
+		e->ci = (double)y * 2 / HEIGHT - 1;
+		e->cr = (double)x * 2 / WIDTH - 1;
 	}
-	if (k == NUM_2)
-	{
+	mlx_destroy_image(e->mlx, e->pt_img);
+	e->pt_img = mlx_new_image(e->mlx, WIDTH, HEIGHT);
+	if ((ft_strncmp(e->arg, "julia", 5) == 0))
 		julia(e);
-		e->arg = "julia";
-	}
-	if (k == NUM_3)
-	{
-		celtic_mandelbrot(e);
-		e->arg = "celtic_mandelbrot";
-	}
-	if (k == NUM_4)
-	{
-		burning_ship(e);
-		e->arg = "burning_ship";
-	}
+	mlx_put_image_to_window(e->mlx, e->win, e->pt_img, 0, 0);
+	return (0);
 }
 
-int		key_press(int k, t_env *e)
+int		mouse_release(int k, int x, int y, t_env *e)
 {
-	if (k == ESC)
+	if (k == 1)
+		e->click = (e->click == 1 ? 0 : 1);
+	return (0);
+}
+
+void	zoom_mouse(t_coord *c, t_env *e)
+{
+	double	move;
+	move = 0.1 / e->zoom;
+	if(WIDTH / 2 < c->x)
+		e->moveX += move;
+	else if(WIDTH / 2 > c->x)
+		e->moveX -= move;
+	if(HEIGHT / 2 < c->y)
+		e->moveY += move;
+	else if(HEIGHT / 2 > c->y)
+		e->moveY -= move;
+}
+
+int		mouse_press(int k, int x, int y, t_env *e)
+{
+	t_coord c;
+
+	c.x = x;
+	c.y = y;
+	double	scale;
+	if (k == 5 || k == 4)
 	{
-		mlx_destroy_window(e->mlx, e->win);
-		exit(1);
+		zoom_mouse(&c, e);
+		e->zoom += 0.1 * e->zoom * (k == 5 ? -1 : 1);
+
 	}
-	if (k == R)
-	{
-		e->zoom = 1;
-		e->moveX = (ft_strncmp(e->arg, "julia", 5) == 0 ? 0 : -0.5);
-		e->moveY = 0;
-		e->maxIterations = 20;
-	}
-	change_fract(k, e);
-	move_zoom_iteration(k, e);
 	mlx_destroy_image(e->mlx, e->pt_img);
 	e->pt_img = mlx_new_image(e->mlx, WIDTH, HEIGHT);
 	if ((ft_strncmp(e->arg, "mandelbrot", 10) == 0))
@@ -82,5 +81,6 @@ int		key_press(int k, t_env *e)
 	if ((ft_strncmp(e->arg, "julia", 5) == 0))
 		julia(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->pt_img, 0, 0);
+
 	return (0);
 }

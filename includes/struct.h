@@ -15,11 +15,11 @@
 # define HEIGHT	600
 # define WIDTH	800
 
-typedef struct	s_pixel
+typedef struct	s_coord
 {
 	int			x;
 	int			y;
-}				t_pixel;
+}				t_coord;
 
 
 
@@ -27,7 +27,7 @@ typedef struct	s_env
 {	
 	void		*mlx;
 	void		*win;
-	void		*pt_img;
+	void		*pt_img; 
 	char		*my_img;
 	int			color;
 
@@ -51,12 +51,17 @@ typedef struct	s_env
 
 }				t_env; 
 
+
+
 void			ft_fill_pix(t_env *e, int x, int y);
 void			init_var(t_env *e);
 int				key_press(int k, t_env *e);
 int				mouse_move(int x, int y, t_env *e);
 int				mouse_release(int k, int x, int y, t_env *e);
-
+int				mouse_press(int k, int x, int y, t_env *e);
+void			zoom_mouse(t_coord *c, t_env *e);
+void			move_zoom_iteration(int k, t_env *e);
+void			change_fract(int k, t_env *e);
 
 void			julia(t_env *e);
 void			mandelbrot(t_env *e);

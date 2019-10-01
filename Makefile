@@ -21,7 +21,8 @@ FILES = src/main.c \
 		src/mandelbrot.c \
 		src/burning_ship.c \
 		src/celtic_mandelbrot.c \
-		src/julia.c
+		src/julia.c \
+		src/mouse_events.c
 LIB = ./src/libft/libft.a
 
 OBJ =	$(FILES:.c=.o)

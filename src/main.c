@@ -56,6 +56,7 @@ int		main(int ac, char **av)
 	mlx_hook(e.win, 2, 0, key_press, &e);
 	mlx_hook(e.win, 6, 0, mouse_move, &e);
 	mlx_hook(e.win, 5, 0, mouse_release, &e);
+	mlx_hook(e.win, 4, 0, mouse_press, &e);
 	mlx_loop(e.mlx);
 	return (0);
 }

@@ -24,7 +24,7 @@ void	julia(t_env *e)
 		while(e->x < WIDTH)
 		{
 			e->newRe = 1.5 * (e->x - WIDTH / 2) / (0.5 * e->zoom * WIDTH) + e->moveX;
-			e->newIm = (e->y - HEIGHT / 2) / (0.5 * e->zoom * HEIGHT) + e->moveY;;
+			e->newIm = (e->y - HEIGHT / 2) / (0.5 * e->zoom * HEIGHT) + e->moveY;
 			e->i = 0;
 			while(e->i < e->maxIterations && (e->newRe * e->newRe + e->newIm * e->newIm) < 4)
 			{
