@@ -49,6 +49,15 @@ void	choose_fract(t_env *e, char **av)
 	}
 }
 
+void	mlx_cmd(t_env *e)
+{
+	mlx_hook(e->win, 2, 0, key_press, &e);
+	mlx_hook(e->win, 6, 0, mouse_move, &e);
+	mlx_hook(e->win, 5, 0, mouse_release, &e);
+	mlx_hook(e->win, 4, 0, mouse_press, &e);
+	mlx_loop(e->mlx);
+}
+
 int		main(int ac, char **av)
 {
 	t_env	e;
@@ -58,15 +67,22 @@ int		main(int ac, char **av)
 		write(2, "usage: ./fractol [mandelbrot|julia|burning_ship...]\n", 53);
 		exit(0);
 	}
-	init_var(&e);
-	e.arg = av[1];
-	choose_fract(&e, av);
-	mlx_put_image_to_window(e.mlx, e.win, e.pt_img, 0, 0);
-	user_interface_texts(&e);
-	mlx_hook(e.win, 2, 0, key_press, &e);
-	mlx_hook(e.win, 6, 0, mouse_move, &e);
-	mlx_hook(e.win, 5, 0, mouse_release, &e);
-	mlx_hook(e.win, 4, 0, mouse_press, &e);
-	mlx_loop(e.mlx);
+	if (ft_strncmp(av[1], "burning_ship", 12) == 0 ||\
+	ft_strncmp(av[1], "mandelbrot", 10) == 0 || ft_strncmp(av[1],\
+	"celtic_mandelbrot", 17) == 0 || ft_strncmp(av[1], "julia", 5) == 0 ||\
+	ft_strncmp(av[1], "mandelbar", 9) == 0)
+	{
+		init_var(&e);
+		e.arg = av[1];
+		choose_fract(&e, av);
+		mlx_put_image_to_window(e.mlx, e.win, e.pt_img, 0, 0);
+		user_interface_texts(&e);
+		mlx_cmd(&e);
+	}
+	else
+	{
+		write(2, "usage: ./fractol [mandelbrot|julia|burning_ship...]\n", 53);
+		exit(0);
+	}
 	return (0);
 }
