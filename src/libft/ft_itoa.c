@@ -6,7 +6,7 @@
 /*   By: vrossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:11:26 by vrossi            #+#    #+#             */
-/*   Updated: 2019/04/18 19:42:13 by vrossi           ###   ########.fr       */
+/*   Updated: 2019/10/02 12:39:53 by vrossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int		intlen(int n)
 char			*ft_itoa(int n)
 {
 	char	*res;
+	char	*tmp;
 	size_t	len;
 
 	if (n == -2147483648)
@@ -48,16 +49,13 @@ char			*ft_itoa(int n)
 	if (n == 0)
 		res[0] = '0';
 	res[len] = '\0';
-	if (n < 0)
-	{
-		res[0] = '-';
-		n = -n;
-	}
 	while (n)
 	{
 		len--;
 		res[len] = n % 10 + '0';
 		n = n / 10;
 	}
-	return (res);
-}  
+	tmp = res;
+	free((void *)res);
+	return (tmp);
+}

@@ -6,7 +6,7 @@
 /*   By: vrossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:18:17 by vrossi            #+#    #+#             */
-/*   Updated: 2019/09/18 11:40:46 by vrossi           ###   ########.fr       */
+/*   Updated: 2019/10/02 12:46:41 by vrossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@
 void	burning_ship(t_env *e)
 {
 	e->y = 0;
-	while(e->y < HEIGHT)
+	while (e->y < H)
 	{
 		e->x = 0;
-		while(e->x < WIDTH)
+		while (e->x < W)
 		{
-			e->pr = 1.5 * (e->x - WIDTH / 2) / (0.5 * e->zoom * WIDTH) + e->moveX;
-    		e->pi = (e->y - HEIGHT / 2) / (0.5 * e->zoom * HEIGHT) + e->moveY;
-			e->newRe = 0;
-			e->newIm = 0;
+			e->pr = 1.5 * (e->x - W / 2) / (0.5 * e->zoom * W) + e->mx;
+			e->pi = (e->y - H / 2) / (0.5 * e->zoom * H) + e->my;
+			e->nr = 0;
+			e->ni = 0;
 			e->i = 0;
-			while(e->i < e->maxIterations && (e->newRe * e->newRe + e->newIm * e->newIm) < 4)
+			while (e->i < e->maxit && (e->nr * e->nr + e->ni * e->ni) < 4)
 			{
-				e->oldRe = e->newRe;
-				e->oldIm = e->newIm;
-				e->newRe = e->oldRe * e->oldRe - e->oldIm * e->oldIm + e->pr;
-				e->newIm = 2 * fabs(e->oldRe * e->oldIm) + e->pi;
+				e->or = e->nr;
+				e->oi = e->ni;
+				e->nr = e->or * e->or - e->oi * e->oi + e->pr;
+				e->ni = 2 * fabs(e->or * e->oi) + e->pi;
 				e->i++;
 				color(e);
 			}

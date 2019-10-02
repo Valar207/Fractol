@@ -28,6 +28,7 @@ MLX_PATH = ./minilibx/
 
 SRCS =  src/main.c \
 		src/events.c \
+		src/events2.c \
 		src/fill_pix.c \
 		src/init_var.c \
 		src/mandelbrot.c \
@@ -38,14 +39,14 @@ SRCS =  src/main.c \
 		src/mouse_events.c \
 		src/color.c
 
-OBJS = $(SRCS:.c=.o)
+OBJ = $(SRCS:.c=.o)
 
 DEPS = $(SRCS:.c=.d)
 
 all: $(NAME)
 
-$(NAME): $(LIB) $(OBJS)
-	@gcc $(FLAGS) $(OBJS) -o $(NAME) $(LIB) -L $(MLX_PATH) $(MLX_FLAGS)
+$(NAME): $(LIB) $(OBJ)
+	@gcc $(FLAGS) $(OBJ) -o $(NAME) $(LIB) -L $(MLX_PATH) $(MLX_FLAGS)
 	@echo "$(YELLOW)./$(NAME) $(GREEN)ready   ✅ "
 
 -include $(DEPS)
@@ -59,7 +60,7 @@ $(LIB) : force
 force :
 
 clean:
-	@rm -f $(OBJS)
+	@rm -f $(OBJ)
 	@echo "$(YELLOW).o    $(RED)deleted 💯 "
 	@rm -f $(DEPS)
 	@echo "$(YELLOW).d    $(RED)deleted 💯 "

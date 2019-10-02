@@ -29,7 +29,7 @@ void	*mlx_new_window(t_xvar *xvar,int size_x,int size_y,char *title)
   xswa.border_pixel = -1;
   xswa.colormap = xvar->cmap;
   /*
-  xswa.event_mask = ButtonPressMask | ButtonReleaseMask | ExposureMask |
+  xswa.event_mask = ButtonPressMask | ButtonreleaseMask | ExposureMask |
     KeyPressMask | KeyReleaseMask | StructureNotifyMask;
   */
   /* xswa.event_mask = ExposureMask; */

@@ -12,8 +12,8 @@
 
 #ifndef STRUCT_H
 # define STRUCT_H
-# define HEIGHT	600
-# define WIDTH	1000
+# define H	600
+# define W	1000
 
 typedef struct	s_coord
 {
@@ -21,17 +21,14 @@ typedef struct	s_coord
 	int			y;
 }				t_coord;
 
-
-
 typedef struct	s_env
-{	
+{
 	void		*mlx;
 	void		*win;
-	void		*pt_img; 
+	void		*pt_img;
 	char		*my_img;
 	int			color;
 	int			chgcol;
-
 	int			x;
 	int			y;
 	int			i;
@@ -39,21 +36,19 @@ typedef struct	s_env
 	double		ci;
 	double		pr;
 	double		pi;
-	double		newRe;
-	double		newIm;
-	double		oldRe;
-	double		oldIm;
+	double		nr;
+	double		ni;
+	double		or;
+	double		oi;
 	double		zoom;
-	double		moveX;
-	double		moveY;
-	int			maxIterations;
+	double		mx;
+	double		my;
+	int			maxit;
 	char		*arg;
 	int			click;
 	int			sw;
 
-}				t_env; 
-
-
+}				t_env;
 
 void			ft_fill_pix(t_env *e, int x, int y);
 void			init_var(t_env *e);
@@ -64,13 +59,14 @@ int				mouse_press(int k, int x, int y, t_env *e);
 void			zoom_mouse(t_coord *c, t_env *e);
 void			move_zoom_iteration(int k, t_env *e);
 void			change_fract(int k, t_env *e);
-void    		color(t_env *e);
+void			change_fract_bis(int k, t_env *e);
+void			color(t_env *e);
 void			user_interface_texts(t_env *e);
-
 void			julia(t_env *e);
 void			mandelbrot(t_env *e);
 void			celtic_mandelbrot(t_env *e);
 void			burning_ship(t_env *e);
 void			mandelbar(t_env *e);
+void			mandelbar_bis(t_env *e);
 
 #endif

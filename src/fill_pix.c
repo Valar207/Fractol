@@ -6,7 +6,7 @@
 /*   By: vrossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 14:53:44 by vrossi            #+#    #+#             */
-/*   Updated: 2019/09/17 14:56:47 by vrossi           ###   ########.fr       */
+/*   Updated: 2019/10/02 13:25:29 by vrossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	ft_fill_pix(t_env *e, int x, int y)
 {
 	int		i;
 
-	i = (((HEIGHT - (HEIGHT - y)) * WIDTH) - (WIDTH - x)) * 4;
-	if (x < WIDTH && x > 0 && y < HEIGHT && y > 0)
+	i = (((H - (H - y)) * W) - (W - x)) * 4;
+	if (x < W && x > 0 && y < H && y > 0)
 	{
 		if (e->sw == 1)
 		{

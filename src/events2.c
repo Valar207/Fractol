@@ -6,39 +6,53 @@
 /*   By: vrossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 15:18:17 by vrossi            #+#    #+#             */
-/*   Updated: 2019/10/02 12:47:17 by vrossi           ###   ########.fr       */
+/*   Updated: 2019/10/02 13:09:00 by vrossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "mlx.h"
+#include "libft/libft.h"
 #include "../includes/struct.h"
 #include "../includes/keyboard_code.h"
-#include <math.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
 
-void	celtic_mandelbrot(t_env *e)
+void	change_fract_bis(int k, t_env *e)
 {
-	e->y = 0;
-	while (e->y < H)
+	if (k == NUM_3)
 	{
-		e->x = 0;
-		while (e->x < W)
-		{
-			e->pr = 1.5 * (e->x - W / 2) / (0.5 * e->zoom * W) + e->mx;
-			e->pi = (e->y - H / 2) / (0.5 * e->zoom * H) + e->my;
-			e->nr = 0;
-			e->ni = 0;
-			e->i = 0;
-			while (e->i < e->maxit && (e->nr * e->nr + e->ni * e->ni) < 4)
-			{
-				e->or = e->nr;
-				e->oi = e->ni;
-				e->nr = fabs(e->or * e->or - e->oi * e->oi) + e->pr;
-				e->ni = 2 * e->or * e->oi + e->pi;
-				e->i++;
-				color(e);
-			}
-			ft_fill_pix(e, e->x, e->y);
-			e->x++;
-		}
-		e->y++;
+		celtic_mandelbrot(e);
+		e->arg = "celtic_mandelbrot";
 	}
+	if (k == NUM_4)
+	{
+		burning_ship(e);
+		e->arg = "burning_ship";
+	}
+	if (k == NUM_5)
+	{
+		e->mx = 0;
+		mandelbar(e);
+		e->arg = "mandelbar";
+	}
+}
+
+void	change_fract(int k, t_env *e)
+{
+	if (k == NUM_1)
+	{
+		mandelbrot(e);
+		e->arg = "mandelbrot";
+	}
+	if (k == NUM_2)
+	{
+		e->mx = 0;
+		e->cr = 0.285;
+		e->ci = 0.01;
+		julia(e);
+		e->arg = "julia";
+	}
+	change_fract_bis(k, e);
 }
