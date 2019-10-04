@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
+#include "../minilibx/mlx.h"
 #include "libft/libft.h"
 #include "../includes/struct.h"
 #include "../includes/keyboard_code.h"

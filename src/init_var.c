@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "mlx.h"
+#include "../minilibx/mlx.h"
 #include "libft/libft.h"
 
 void	init_var(t_env *e)
